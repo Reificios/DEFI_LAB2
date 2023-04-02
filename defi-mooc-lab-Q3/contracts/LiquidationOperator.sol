@@ -199,8 +199,8 @@ contract LiquidationOperator is IUniswapV2Callee {
         // debt_USDC = 2000000000; // max is 8128956343
         // debt_USDC = 4000000000;
         // debt_USDC = 6000000000;
-        debt_USDC = 8128956342;
-        // debt_USDC = 8128956343;
+        // debt_USDC = 8128956342;
+        debt_USDC = 8128956343;
 
         // END TODO
     }
