@@ -272,12 +272,16 @@ contract LiquidationOperator is IUniswapV2Callee {
         // 2.1 liquidate the target user
         
         uint debtToCover = amount1;
-        console.log("Flashed loaned %s.%s USDC", (debtToCover/ (10**6)), debtToCover% (10**6));
+        console.log("Flashed loaned %s.%s USDC", (debtToCover / (10**6)), debtToCover % (10**6));
         USDC.approve(address(lendingPool), debtToCover);
         lendingPool.liquidationCall(address(WETH), address(USDC), liquidationTarget, debtToCover, false);
 
+        // uint cur_WETH = WETH.balanceOf(address(this));
+        // console.log("Liquated and got %s.%s ETH as collateral", (cur_WETH / (10**18)), cur_WETH % (10**18));
+
         // 2.2 Repaying the (WETH) debt -- may or may not have WETH left over
         uint repay_WETH = getAmountIn(debtToCover, reserve_WETH_Pool1, reserve_USDC_Pool1);
+        // console.log("Paid the flash loan %s.%s ETH",(repay_WETH / (10**18)), repay_WETH % (10**18));
         WETH.transfer(address(uniswapV2Pair_WETH_USDC), repay_WETH);
         
         // END TODO
